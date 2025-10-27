@@ -24,3 +24,5 @@ class Weapon(Item):
 
 Item.registry["Weapon"] = Weapon
 
+axe = Weapon("Good Axe", 100,120)
+
