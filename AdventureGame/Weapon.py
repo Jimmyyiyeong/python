@@ -1,4 +1,6 @@
-class Weapon:
+from AdventureGame.Items import Item
+
+class Weapon(Item):
     def __init__(self, name, min_damage, max_damage, durability = None, rarity = "Common", range = 1):
         self.name = name
         self.min_damage = min_damage
@@ -18,13 +20,10 @@ class Weapon:
         else:
             self.range = range
 
-    def weapon_info(self):
-        print(f"Weapon: {self.name}")
-        print(f"Rarity: {self.rarity}")
-        print(f"Damage: {self.min_damage} - {self.max_damage}")
-        print(f"Durability: {self.durability}")
-        print(f"Range: {self.range}")
-        print("")
+    def describe(self):
+        return (
+            f"{self.name} (Damage: {self.min_damage} - {self.max_damage} | Rarity: {self.rarity} | Durability: {self.durability} | Range: {self.range})"
+        )
 
 
 if __name__ == "__main__":

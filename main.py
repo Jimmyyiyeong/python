@@ -6,5 +6,9 @@ bat = Weapon("Exceptionally Durable Baseball Bat", 10, 200, 1000, "Exceedingly R
 Jimmy = Character("Jimmy", 69, "male", "thug", axe)
 
 Jimmy.greeting()
-#bat.weapon_info()
-
+Jimmy.show_inventory()
+Jimmy.add_to_inventory(axe)
+Jimmy.show_inventory()
+Jimmy.equip_weapon(0)
+Jimmy.show_inventory()
+Jimmy.greeting()
