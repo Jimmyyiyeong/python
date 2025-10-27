@@ -1,4 +1,5 @@
-from AdventureGame.Weapon import *
+from AdventureGame.Inventory.Weapon import *
+from AdventureGame.Inventory.Item import *
 from AdventureGame.Character import *
 
 axe = Weapon("Good Axe", 100,120)
@@ -12,3 +13,6 @@ Jimmy.show_inventory()
 Jimmy.equip_weapon(0)
 Jimmy.show_inventory()
 Jimmy.greeting()
+
+sword = Weapon("Ironfang", 5, 10, None, "Rare", 2, 20)
+print(sword.describe())

@@ -1,4 +1,4 @@
-from AdventureGame.Weapon import *
+from AdventureGame.Inventory.Weapon import *
 
 class Character:
 
