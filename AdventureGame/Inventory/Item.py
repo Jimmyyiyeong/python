@@ -6,7 +6,7 @@ class Item:
         self.rarity = rarity
         
     def describe(self):
-        return f"{self.name} ({self.item_type}, Rarity: {self.rarity})"
+        return f"{self.name}, Type: {self.item_type}, Rarity: {self.rarity}"
 
     def __str__(self):
         return self.describe()
