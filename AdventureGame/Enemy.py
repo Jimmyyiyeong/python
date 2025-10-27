@@ -6,3 +6,6 @@ class Enemy:
         self.health = health
         self.max_health = health
         self.weapon = weapon
+
+    def is_alive(self):
+        return self.health > 0
