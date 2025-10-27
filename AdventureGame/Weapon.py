@@ -24,6 +24,11 @@ class Weapon(Item):
         return (
             f"{self.name} (Damage: {self.min_damage} - {self.max_damage} | Rarity: {self.rarity} | Durability: {self.durability} | Range: {self.range})"
         )
+    
+#WEAPONLIST
+
+axe = Weapon("Good Axe", 100,120)
+bat = Weapon("Exceptionally Durable Baseball Bat", 10, 200, 1000, "Exceedingly Rare", 3)
 
 
 if __name__ == "__main__":
