@@ -22,3 +22,12 @@ class Item:
     def __str__(self):
         return self.describe()
     
+    def create(item_type, *args, **kwargs):
+        """
+        Factory method to create an item by type.
+        """
+        if item_type not in Item.registry:
+            raise ValueError(f"No item class registered for type '{item_type}'")
+        item_cls = Item.registry[item_type]
+        return item_cls(*args, **kwargs)
+    

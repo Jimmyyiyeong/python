@@ -22,3 +22,5 @@ class Weapon(Item):
             f"Sell Price: {self.sell_price} "
         )
 
+Item.registry["Weapon"] = Weapon
+
