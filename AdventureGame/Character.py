@@ -1,4 +1,4 @@
-from AdventureGame.Weapon import *
+from AdventureGame.Inventory.Weapon import *
 
 class Character:
 
@@ -25,11 +25,12 @@ class Character:
             return
   
         print(f"{self.name}'s Inventory:")
-        for i, item in enumerate(self.inventory):
+        for i, item in enumerate(self.inventory, start = 1):
             print(f"{i}. {item.describe()}")
         print("")
 
     def equip_weapon(self, index):
+        index -= 1
         if 0 <= index < len(self.inventory):
             new_weapon = self.inventory.pop(index)
             if self.weapon:     
