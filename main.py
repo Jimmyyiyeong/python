@@ -1,8 +1,4 @@
-from AdventureGame.Inventory.Item import *
-from AdventureGame.Inventory.Weapon import *
-from AdventureGame.Character import *
-from AdventureGame.Inventory.Consumables import *
-from AdventureGame.Enemy import *
+from AdventureGame import *
 
 axe = Weapon("Good Axe", 100,120)
 sword = Weapon("Ironfang", 5, 10, None, "Rare", 2, 20)
