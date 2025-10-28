@@ -18,7 +18,7 @@ class Weapon(Item):
             f"{self.name}, Type: {self.item_type}, Rarity: {self.rarity}, "
             f"Damage: {self.min_damage}-{self.max_damage}, "
             f"Durability: {self.durability}, "
-            f"Range: {self.range}, "
+            f"Range: {self.range} "
         )
 
 axe = Weapon("Good Axe",None, 100,120)
