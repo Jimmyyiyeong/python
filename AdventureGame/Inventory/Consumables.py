@@ -1,21 +1,16 @@
 from .Item import Item
 
 class Consumables(Item):
-    item_type = "Consumables"
-    attributes = ["name", "permanent"]
     
-    def __init__(self, name, rarity = "Common", permanent = False, sell_price = 0, ):
-        super().__init__(name, rarity, sell_price)
-        self.name = name
+    def __init__(self, name, item_type, rarity = "Common", permanent = False):
+        super().__init__(name, item_type, rarity)
         self.permanent = permanent
+        self.item_type = item_type if item_type is not None else "Consumable"
         self.rarity = rarity if rarity is not None else "Common"
         
     def describe(self):
         return (
             f"{self.name}, Type: {self.item_type}, Rarity: {self.rarity}, "
-            f"Permanent: {"Yes" if self.permanent else "No"}, "
-            f"Sell Price: {self.sell_price} "
+            f"Permanent: {"Yes" if self.permanent else "No"} "
         )
         
-        
-Item.registry["Consumables"] = Consumables
