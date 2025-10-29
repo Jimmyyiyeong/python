@@ -16,9 +16,9 @@ class Weapon(Item):
     def describe(self):
         """ Description of weapon """
         return (
-            f"{self.name}, Type: {self.item_type}, Rarity: {self.rarity}, "
-            f"Damage: {self.min_damage}-{self.max_damage}, "
-            f"Durability: {self.durability}, "
+            f"{self.name} | Type: {self.item_type} | Rarity: {self.rarity} | "
+            f"Damage: {self.min_damage}-{self.max_damage} | "
+            f"Durability: {self.durability} | "
             f"Range: {self.range} "
         )
     

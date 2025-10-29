@@ -13,7 +13,7 @@ class Consumables(Item):
     def describe(self):
         """ Description of consumable """
         return (
-            f"{self.name}, Type: {self.item_type}, Rarity: {self.rarity}, "
+            f"{self.name} | Type: {self.item_type} | Rarity: {self.rarity} | "
             f"Permanent: {"Yes" if self.permanent else "No"} "
         )
     
