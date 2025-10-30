@@ -2,12 +2,11 @@ from .Item import Item
 
 class Consumables(Item):
     
-    def __init__(self, name, item_type, effect_amount=0, rarity="Common", permanent=False):
+    def __init__(self, name, effect_amount=0, rarity=None, permanent=False):
         """ `Default object attributes """
-        super().__init__(name, item_type, rarity)
+        self.name = name
         self.permanent = permanent
-        self.item_type = item_type if item_type is not None else "Consumable"
-        self.rarity = rarity if rarity is not None else "Common"
+        self.rarity = rarity
         self.effect_amount = effect_amount
         
     def describe(self):
