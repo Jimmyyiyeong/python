@@ -25,7 +25,7 @@ class Weapon(Item):
     def equip(self, user):
         """ If user equips another weapon, returns old one to inventory """
         if user.weapon:
-            print(f"{user.name} unequipped {user.weapon.name} and returned it to inventory.")
+            print(f"\n{user.name} unequipped {user.weapon.name} and returned it to inventory.")
             user.inventory.append(user.weapon)
         user.weapon = self
         print(f"{user.name} equipped {self.name}!\n")
