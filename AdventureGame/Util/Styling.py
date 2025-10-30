@@ -18,3 +18,7 @@ BG_CYAN = "\033[46m"
 #TEXTSTYLE
 BOLD = "\033[1m"
 UNDERLINE = "\033[4m"
+ITALIC = "\033[3m"
+
+def wait_for_continue():
+    input(f"\n{BOLD}Press ENTER to continue...{RESET}")
