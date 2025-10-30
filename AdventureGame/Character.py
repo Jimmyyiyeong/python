@@ -3,12 +3,9 @@ from AdventureGame.Inventory.Consumables import *
 
 class Character:
 
-    def __init__(self, name, age, sex, occupation, health=100, weapon=None):
+    def __init__(self, name, char_type="char", health=0, weapon=None):
         """ Default character attributes """
         self.name = name
-        self.age = age
-        self.sex = sex
-        self.occupation = occupation
         self.weapon = weapon
         self.armor = None
         self.inventory = []
@@ -18,7 +15,7 @@ class Character:
     def greeting(self):
         """ Introduction of player character """
         weapon_name = self.weapon.name if self.weapon else "no weapon"
-        print(f"Hello, my name is {self.name} and I am {self.age} years old. I am a {self.sex} {self.occupation} and I wield {weapon_name}. Nice to meet you!\n")
+        print(f"Hello, my name is {self.name} and I wield {weapon_name}. Time to die!\n")
 
     def add_to_inventory(self, item):
         """ Adds an item to inventory """
