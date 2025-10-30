@@ -26,5 +26,5 @@ class Consumables(Item):
         print(f"{user.name}'s HP: {user.health}/{user.max_health}\n")
         
 #PREDEFINED CONSUMABLES
-Minor_health_potion = Consumables("Minor Health Potion", "Consumable", 20)
-Major_Health_potion = Consumables("Major Health Potion", "Consumable", 50)
+Minor_health_potion = Consumables("Minor Health Potion", 20, "Common")
+Major_Health_potion = Consumables("Major Health Potion", 50, "Common")
