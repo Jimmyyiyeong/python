@@ -8,7 +8,7 @@ class Item:
         
     def describe(self):
         """ Description of item """
-        return f"{self.name}, Type: {self.item_type}, Rarity: {self.rarity} "
+        return f"{self.name} | Type: {self.item_type} | Rarity: {self.rarity} "
 
     def __str__(self):
         """ Returns describe function as a string """
