@@ -4,7 +4,7 @@ class Weapon(Item):
 
     def __init__(self, name, min_damage, max_damage, rarity=None, crit_chance=0.1):
         """ Inherits attributes from Item class """
-        super().__init__(self, name, item_type="Weapon", rarity=rarity)
+        super().__init__(name, item_type="Weapon", rarity=rarity)
         """ Default wepaon attributes """
         self.min_damage = min_damage
         self.max_damage = max_damage
