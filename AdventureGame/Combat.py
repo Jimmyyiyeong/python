@@ -20,9 +20,16 @@ class Combat:
 
     def player_attack(self):
         """ Randomizes damage based on weapon min and max damage. Max is a builtin python function that returns the larger of two values"""
-        damage = random.randint(self.player.weapon.min_damage, self.player.weapon.max_damage)
+        base_damage = random.randint(self.player.weapon.min_damage, self.player.weapon.max_damage)
+        crit_multiplier = 1.5
+        if random.random() < self.player.weapon.crit_chance:
+            damage = int(base_damage * crit_multiplier)
+            print(f"\nCRITICAL HIT! {self.player.name} sharpened the senses and strikes {self.enemy.name} with precision, dealing {damage} damage!\n")
+        else:
+            damage = base_damage
+            print(f"\n{self.player.name} attacks {self.enemy.name} for {damage} damage!\n")
         self.enemy.health = max(0, self.enemy.health - damage)
-        print(f"\nYou attack {self.enemy.name} for {damage} damage!\n")
+
 
     def enemy_attack(self):
         """ Randomizes damage based on weapon min and max damage. Also checks enemy health"""
