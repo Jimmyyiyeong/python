@@ -10,6 +10,7 @@ class Character:
         self.sex = sex
         self.occupation = occupation
         self.weapon = weapon
+        self.armor = None
         self.inventory = []
         self.health = health
         self.max_health = health
