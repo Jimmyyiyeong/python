@@ -23,7 +23,7 @@ class Consumables(Item):
         user.health = min(user.max_health, user.health + self.effect_amount)
         healed = user.health - old_health
 
-        print(f"{user.name} used {self.name} and healed for {healed} HP!")
+        print(f"\n{user.name} used {self.name} and healed for {healed} HP!")
         print(f"{user.name}'s HP: {user.health}/{user.max_health}\n")
         
 #PREDEFINED CONSUMABLES
