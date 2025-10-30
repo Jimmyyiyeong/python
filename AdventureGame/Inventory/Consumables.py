@@ -2,15 +2,30 @@ from .Item import Item
 
 class Consumables(Item):
     
-    def __init__(self, name, item_type, rarity = "Common", permanent = False):
+    def __init__(self, name, item_type, effect_amount=0, rarity="Common", permanent=False):
+        """ `Default object attributes """
         super().__init__(name, item_type, rarity)
         self.permanent = permanent
         self.item_type = item_type if item_type is not None else "Consumable"
         self.rarity = rarity if rarity is not None else "Common"
+        self.effect_amount = effect_amount
         
     def describe(self):
+        """ Description of consumable """
         return (
-            f"{self.name}, Type: {self.item_type}, Rarity: {self.rarity}, "
+            f"{self.name} | Type: {self.item_type} | Rarity: {self.rarity} | "
             f"Permanent: {"Yes" if self.permanent else "No"} "
         )
+    
+    def use(self, user):
+        """ user in this case is placeholder logic for future expansion. It would enable enemies to use potions aswell using the same function """
+        old_health = user.health
+        user.health = min(user.max_health, user.health + self.effect_amount)
+        healed = user.health - old_health
+
+        print(f"{user.name} used {self.name} and healed for {healed} HP!")
+        print(f"{user.name}'s HP: {user.health}/{user.max_health}\n")
         
+#PREDEFINED CONSUMABLES
+Minor_health_potion = Consumables("Minor Health Potion", "Consumable", 20)
+Major_Health_potion = Consumables("Major Health Potion", "Consumable", 50)
