@@ -1,4 +1,4 @@
-from AdventureGame import *
+from AdventureGame.Util.Styling import RED, RESET
 import random
 
 class Combat:
@@ -42,7 +42,7 @@ class Combat:
 
     def engage(self):
         """ Combat loop using a while loop and switch, reading input from player """
-        print(f"A wild {self.enemy.name} appears!\n")
+        print(f"A wild {self.enemy.name} appears!")
 
         while self.enemy.health > 0 and self.player.health > 0:
             print("\n---Battle Menu---")
