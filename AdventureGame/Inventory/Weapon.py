@@ -2,12 +2,12 @@ from .Item import Item
 
 class Weapon(Item):
 
-    def __init__(self, name, min_damage, max_damage, crit_chance=None, rarity=None,):
+    def __init__(self, name, min_damage, max_damage, rarity=None, crit_chance=0.1):
         """ Default wepaon attributes """
         self.name = name
         self.min_damage = min_damage
         self.max_damage = max_damage
-        self.crit_chance = crit_chance
+        self.crit_chance = float(crit_chance)
         self.rarity = rarity
 
     def describe(self):
@@ -32,7 +32,7 @@ class Weapon(Item):
         self.equip(user)
 
 # PREDEFINED WEAPONS
-Frostmourne = Weapon("Frostmourne", 2, 18, "Legendary")
+Frostmourne = Weapon("Frostmourne", 2, 18, "Legendary", 0.5)
 Sulfuras = Weapon("Sulfuras, Hand of Ragnaros", 5, 15, "Legendary")
 Thunderfury = Weapon("Thunderfury, Blessed blade of the Windseeker", 8, 12, "Legendary")
 Warglaive = Weapon ("Warglaive of Azznioth", 9, 11, "Legendary")
