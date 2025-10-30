@@ -29,18 +29,20 @@ class Character:
         if not self.inventory:
             print("Your inventory is empty..\n")
             return
-  
-        print(f"{self.name}'s Inventory:")
+        print(f"\n{self.name}'s Inventory:\n")
         for i, item in enumerate(self.inventory, start = 1):
             print(f"{i}. {item.describe()}")
         print("")
 
     def use_item(self, index):
         """ Uses/equips item/weapon and removes it from inventory """
-        index -= 1  
-        if 0 <= index < len(self.inventory):
-            item = self.inventory.pop(index)
-            item.use(self)
-        else:
-            print("Invalid item selection.\n")
+        try:
+            index -= 1
+            if 0 <= index < len(self.inventory):
+                item = self.inventory.pop(index)
+                item.use(self)
+            else:
+                print("Invalid item selection.\n")
+        except(ValueError, IndexError, AttributeError) as e:
+                print("Something went wrong while using the item...\n")
     
