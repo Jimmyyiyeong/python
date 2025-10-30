@@ -1,5 +1,5 @@
-from AdventureGame.Inventory.Weapon import *
-from AdventureGame.Inventory.Consumables import *
+from .Inventory import *
+from .Inventory import *
 
 class Character:
 

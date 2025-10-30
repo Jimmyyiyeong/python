@@ -4,7 +4,7 @@ class Item:
         """ Default item attributes """
         self.name = name
         self.item_type = item_type
-        self.rarity = rarity
+        self.rarity = rarity if rarity is not None else "Common"
         
     def describe(self):
         """ Description of item """

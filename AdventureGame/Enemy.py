@@ -1,6 +1,6 @@
-from AdventureGame.Character import *
-from AdventureGame.Inventory.Weapon import *
-from AdventureGame.Inventory.Armor import *
+from .Character import *
+from .Inventory import *
+from .Inventory import *
 
 class Enemy(Character):
     def __init__(self, name, health=None, weapon=None, armor=None):
