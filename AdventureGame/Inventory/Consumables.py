@@ -3,10 +3,10 @@ from .Item import Item
 class Consumables(Item):
     
     def __init__(self, name, effect_amount=0, rarity=None, permanent=False):
+        """ Inherits attributes from Items """
+        super().__init__(name, item_type="Consumable", rarity=rarity)
         """ `Default object attributes """
-        self.name = name
         self.permanent = permanent
-        self.rarity = rarity
         self.effect_amount = effect_amount
         
     def describe(self):

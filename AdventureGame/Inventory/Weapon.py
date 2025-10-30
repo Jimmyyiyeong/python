@@ -3,17 +3,17 @@ from .Item import Item
 class Weapon(Item):
 
     def __init__(self, name, min_damage, max_damage, rarity=None, crit_chance=0.1):
+        """ Inherits attributes from Item class """
+        super().__init__(self, name, item_type="Weapon", rarity=rarity)
         """ Default wepaon attributes """
-        self.name = name
         self.min_damage = min_damage
         self.max_damage = max_damage
         self.crit_chance = float(crit_chance)
-        self.rarity = rarity
 
     def describe(self):
         """ Description of weapon """
         return (
-            f"{self.name} | Rarity: {self.rarity} | Damage: {self.min_damage}-{self.max_damage} | Crit Chance: {self.crit_chance}")
+            f"{self.name} | Type: {self.item_type} | Rarity: {self.rarity} | Damage: {self.min_damage}-{self.max_damage} | Crit Chance: {self.crit_chance}")
     
     def equip(self, user):
         """ If user equips another weapon, returns old one to inventory """

@@ -1,6 +1,6 @@
 class Item:
 
-    def __init__(self, name, item_type, rarity="Common"):
+    def __init__(self, name, item_type="Item", rarity=None):
         """ Default item attributes """
         self.name = name
         self.item_type = item_type
