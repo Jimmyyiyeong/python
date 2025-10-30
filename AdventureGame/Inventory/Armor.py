@@ -24,3 +24,5 @@ Cloth_armor = Armor("Magister's Regalia", 2, "Rare")
 Leather_armor = Armor("Bloodfang Armor", 3, "Epic")
 Mail_armor = Armor("Dragonstalker Regalia", 4, "Epic")
 Plate_armor = Armor("Judgement Armor", 6, "Legendary")
+
+Goblin_armor = Armor("Goblin armor", 1, "Common")
