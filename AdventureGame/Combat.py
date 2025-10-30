@@ -1,3 +1,4 @@
+from AdventureGame import *
 import random
 
 class Combat:
@@ -24,7 +25,7 @@ class Combat:
         crit_multiplier = 1.5
         if random.random() < self.player.weapon.crit_chance:
             damage = int(base_damage * crit_multiplier)
-            print(f"\nCRITICAL HIT! {self.player.name} sharpened the senses and strikes {self.enemy.name} with precision, dealing {damage} damage!\n")
+            print(f"\n{RED}CRITICAL HIT!{RESET} {self.player.name} sharpened the senses and strikes {self.enemy.name} with precision, dealing {damage} damage!\n")
         else:
             damage = base_damage
             print(f"\n{self.player.name} attacks {self.enemy.name} for {damage} damage!\n")
