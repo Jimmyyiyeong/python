@@ -1,4 +1,4 @@
-from AdventureGame.Util.Styling import RED, RESET
+from AdventureGame.Util.Styling import RED, RESET, ITALIC, wait_for_continue
 import random
 
 class Combat:
@@ -12,15 +12,19 @@ class Combat:
         print(f"\n{self.player.name}'s status:")
         print(f"Health: {self.player.health}/{self.player.max_health}")
         if self.player.weapon:
-            print(f"Equipped weapon: {self.player.weapon.name}\n")
+            print(f"Equipped weapon: {self.player.weapon.describe()}")
         else:
-            print("No weapon equipped!\n")
+            print("No weapon equipped!")
+        if self.player.armor:
+            print(f"Equipped armor: {self.player.armor.name}\n")
+        else:
+            print("No armor equipped.\n")
         print(f"{self.enemy.name}'s status:")
         print(f"Health: {self.enemy.health}/{self.enemy.max_health}")
         print(f"Equipped weapon: {self.enemy.weapon.name}")
 
     def player_attack(self):
-        """ Randomizes damage based on weapon min and max damage + crit modifier. Max is a builtin python function that returns the larger of two values"""
+        """ Randomizes damage based on weapon min and max damage + crit modifier. Also has logic for damage absorbption. Max is a builtin python function that returns the larger of two values"""
         base_damage = random.randint(self.player.weapon.min_damage, self.player.weapon.max_damage)
         crit_multiplier = 1.5
         if random.random() < self.player.weapon.crit_chance:
@@ -28,21 +32,34 @@ class Combat:
             print(f"\n{RED}CRITICAL HIT!{RESET} {self.player.name} sharpened the senses and strikes {self.enemy.name} with precision, dealing {damage} damage!\n")
         else:
             damage = base_damage
-            print(f"\n{self.player.name} attacks {self.enemy.name} for {damage} damage!\n")
-        self.enemy.health = max(0, self.enemy.health - damage)
+        absorbed = self.enemy.armor.defense if self.enemy.armor else 0
+        final_damage = max(0, damage - absorbed)
+        print(f"\n{self.player.name} attacks {self.enemy.name} for {damage} damage!")
+        if absorbed > 0:
+             print(f"{ITALIC}{self.enemy.name}'s {self.enemy.armor.name} absorbs {absorbed} damage!{RESET}")
+        self.enemy.health = max(0, self.enemy.health - final_damage)
+        print(f"{self.enemy.name} take {final_damage} damage. (HP: {self.enemy.health}/{self.enemy.max_health})\n")
 
 
     def enemy_attack(self):
-        """ Randomizes damage based on weapon min and max damage. Also checks enemy health"""
+        """ Randomizes damage based on weapon min and max damage with player armor taken into account. Also checks enemy health"""
         if self.enemy.health <= 0:
             return
-        damage = random.randint(self.enemy.weapon.min_damage, self.enemy.weapon.max_damage)
-        self.player.health = max(0, self.player.health - damage)
-        print(f"{self.enemy.name} attacks you for {damage} damage!")
+        base_damage = random.randint(self.enemy.weapon.min_damage, self.enemy.weapon.max_damage)
+        absorbed = self.player.armor.defense if self.player.armor else 0
+        final_damage = max(0, base_damage - absorbed)
+        print(f"{self.enemy.name} attacks you for {base_damage} damage!")
+        if absorbed > 0:
+            print(f"{ITALIC}{self.player.name}'s {self.player.armor.name} absorbs {absorbed} damage!{RESET}")
+        self.player.health = max(0, self.player.health - final_damage)
+        print(f"You take {final_damage} damage. (HP: {self.player.health}/{self.player.max_health})")
+
 
     def engage(self):
         """ Combat loop using a while loop and switch, reading input from player """
         print(f"A wild {self.enemy.name} appears!")
+
+        wait_for_continue()
 
         while self.enemy.health > 0 and self.player.health > 0:
             print("\n---Battle Menu---")
