@@ -13,11 +13,7 @@ class Weapon(Item):
     def describe(self):
         """ Description of weapon """
         return (
-            f"{self.name} | Type: {self.item_type} | Rarity: {self.rarity} | "
-            f"Damage: {self.min_damage}-{self.max_damage} | "
-            f"Durability: {self.durability} | "
-            f"Range: {self.range} "
-        )
+            f"{self.name} | Rarity: {self.rarity} | Damage: {self.min_damage}-{self.max_damage} | Crit Chance: {self.crit_chance}")
     
     def equip(self, user):
         """ If user equips another weapon, returns old one to inventory """
@@ -37,4 +33,3 @@ Sulfuras = Weapon("Sulfuras, Hand of Ragnaros", 5, 15, "Legendary")
 Thunderfury = Weapon("Thunderfury, Blessed blade of the Windseeker", 8, 12, "Legendary")
 Warglaive = Weapon ("Warglaive of Azznioth", 9, 11, "Legendary")
 Rhokdelar = Weapon("Rhok'delar, Longbow of the Ancient Keeper", 7, 13, "Legendary")
-
