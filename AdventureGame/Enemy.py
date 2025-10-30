@@ -16,9 +16,9 @@ class Enemy:
         """ Description of enemy """
         description = f"{self.name} (HP: {self.health}/{self.max_health})"
         if self.weapon:
-            description += f" (Weapon: {self.weapon.describe()}"
+            description += f"Weapon: {self.weapon.describe()}"
         else:
-            description += f" (Weapon: Unarmed"
+            description += f"Weapon: Unarmed"
         return description
     
 #PREDEVINED ENEMIES
