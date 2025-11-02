@@ -12,10 +12,6 @@ class Enemy(Character):
         self.armor = armor
         self.health = health
         self.max_health = health
-
-    def is_alive(self):
-        """ Checks if health is above 0 """
-        return self.health > 0
     
     def describe(self):
         """ Description of enemy """
@@ -26,5 +22,5 @@ class Enemy(Character):
             description += f"Weapon: Unarmed"
         return description
     
-#PREDEVINED ENEMIES
+#PREDEFINED ENEMIES
 Goblin = Enemy("Premature Goblin", 50, Sulfuras, Goblin_armor)
