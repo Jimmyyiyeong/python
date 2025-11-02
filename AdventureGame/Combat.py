@@ -49,21 +49,11 @@ class Combat:
 
         return final_damage, log
 
-    def player_attack(self):
+    def attack(self, attacker, defender, allow_crit=True):
         """ Calls the calculate_damage function and reduces enemy HP accordingly """
-        damage, log = self.calculate_damage(self.player, self.enemy, allow_crit=True)
+        damage, log = self.calculate_damage(attacker, defender, allow_crit)
         print(log)
-        self.enemy.health = max(0, self.enemy.health - damage)
-
-
-    def enemy_attack(self):
-        """ Calls the calculate_damage function and reduces player HP accordinly"""
-        if self.enemy.health <= 0:
-            return
-        damage, log = self.calculate_damage(self.enemy, self.player, allow_crit=True)
-        print(log)
-        self.player.health = max(0, self.player.health - damage)
-
+        defender.health = max(0, defender.health - damage)
 
     def engage(self):
         """ Combat loop using a while loop and switch, reading input from player """
@@ -71,7 +61,7 @@ class Combat:
 
         wait_for_continue()
 
-        while self.enemy.health > 0 and self.player.health > 0:
+        while self.enemy.is_alive() and self.player.is_alive():
             print("\n---Battle Menu---")
             print("1. Attack")
             print("2. Inventory")
@@ -81,7 +71,7 @@ class Combat:
             choice = input("Choose an action: ").strip()
 
             if choice == "1":
-                self.player_attack()
+                self.attack(self.player, self.enemy, allow_crit=True)
             elif choice == "2":
                 if not self.player.inventory:
                     print("Your inventory is empty. You can't use any items right now.\n")
@@ -94,7 +84,6 @@ class Combat:
                     try:
                         index = int(user_input)
                         self.player.use_item(index)
-                        break
                     except ValueError:
                         print("Invalid input. Try again.\n")
                     except IndexError:
@@ -105,7 +94,7 @@ class Combat:
             elif choice == "4":
                 if random.random() < 0.3:
                     print("\nYou attempt to flee but the enemy blocks your path!\n")
-                    self.enemy_attack()
+                    self.attack(self.enemy, self.player, allow_crit=True)
                     continue
                 else:
                     print("\nYou fled the battle!\n")
@@ -113,9 +102,9 @@ class Combat:
             else:
                 print("Invalid choice.\n")
                 continue
-            if self.enemy.health > 0:
-                self.enemy_attack()
-        if self.enemy.health <= 0:
+            if self.enemy.is_alive():
+                self.attack(self.enemy, self.player, allow_crit=True)
+        if not self.enemy.is_alive():
             print(f"You have defeated {self.enemy.name}!")
-        elif self.player.health <= 0:
+        elif self.player.is_alive():
             print("You have been defeated... Game over.")
