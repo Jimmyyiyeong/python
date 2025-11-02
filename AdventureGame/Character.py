@@ -17,10 +17,14 @@ class Character:
         weapon_name = self.weapon.name if self.weapon else "no weapon"
         print(f"Hello, my name is {self.name} and I wield {weapon_name}. Time to die!\n")
 
+    def is_alive(self):
+        """ Checks if health is above 0 """
+        return self.health > 0
+
     def add_to_inventory(self, item):
         """ Adds an item to inventory """
         self.inventory.append(item)
-        print(f"{item.name} has been added to your inventory!\n")
+        print(f"{item.name} has been added to {self.name} inventory!\n")
 
     def show_inventory(self):
         """ Display inventory as a list, starting at 1"""

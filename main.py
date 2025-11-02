@@ -15,4 +15,6 @@ Jimmy.show_inventory()
 Jimmy.greeting()
 print(Goblin.describe()) """
 battle = Combat(Jimmy, Goblin)
+Goblin.add_to_inventory(Frostmourne)
+Goblin.use_item(1)
 battle.engage()
