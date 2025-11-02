@@ -27,8 +27,8 @@ class Combat:
     def status(self):
         """ Prints player and enemy status """
 
-        self.print_character_status(self.player)
-        self.print_character_status(self.enemy)
+        self.character_status(self.player)
+        self.character_status(self.enemy)
 
     def calculate_damage(self, attacker, defender, allow_crit=True):
         """ Combat logic. Randomizes a number between the weapon min and max damage, checks for crit and armor absorption and returns the final damage calculation and printable log 
