@@ -4,28 +4,36 @@ import random
 class Combat:
     def __init__(self, player, enemy):
         """ Default attributes. When in combat, "Character" is referred to as "player" """
+
         self.player = player
         self.enemy = enemy
 
-    def status(self):
-        """ Prints player and enemy status """
-        print(f"\n{self.player.name}'s status:")
-        print(f"Health: {self.player.health}/{self.player.max_health}")
-        if self.player.weapon:
-            print(f"Equipped weapon: {self.player.weapon.describe()}")
+    def character_status(self, character):
+        """Prints the status of any character"""
+
+        print(f"\n{character.name}'s status:")
+        print(f"Health: {character.health}/{character.max_health}")
+    
+        if character.weapon:
+            print(f"Equipped weapon: {character.weapon.describe()}")
         else:
             print("No weapon equipped!")
-        if self.player.armor:
-            print(f"Equipped armor: {self.player.armor.name}\n")
+    
+        if character.armor:
+            print(f"Equipped armor: {character.armor.name} (abs: {character.armor.defense})\n")
         else:
             print("No armor equipped.\n")
-        print(f"{self.enemy.name}'s status:")
-        print(f"Health: {self.enemy.health}/{self.enemy.max_health}")
-        print(f"Equipped weapon: {self.enemy.weapon.name}")
+
+    def status(self):
+        """ Prints player and enemy status """
+
+        self.print_character_status(self.player)
+        self.print_character_status(self.enemy)
 
     def calculate_damage(self, attacker, defender, allow_crit=True):
         """ Combat logic. Randomizes a number between the weapon min and max damage, checks for crit and armor absorption and returns the final damage calculation and printable log 
         Allow crit is implemented in case we want specific attacks or spells to not be able to crit in the future (like DOTs or other effects)"""
+
         base_damage = random.randint(attacker.weapon.min_damage, attacker.weapon.max_damage)
         crit = False
         crit_damage = base_damage
@@ -51,12 +59,14 @@ class Combat:
 
     def attack(self, attacker, defender, allow_crit=True):
         """ Calls the calculate_damage function and reduces enemy HP accordingly """
+
         damage, log = self.calculate_damage(attacker, defender, allow_crit)
         print(log)
         defender.health = max(0, defender.health - damage)
 
     def engage(self):
         """ Combat loop using a while loop and switch, reading input from player """
+
         print(f"A wild {self.enemy.name} appears!")
 
         wait_for_continue()
@@ -72,6 +82,7 @@ class Combat:
 
             if choice == "1":
                 self.attack(self.player, self.enemy, allow_crit=True)
+
             elif choice == "2":
                 if not self.player.inventory:
                     print("Your inventory is empty. You can't use any items right now.\n")
@@ -88,9 +99,11 @@ class Combat:
                         print("Invalid input. Try again.\n")
                     except IndexError:
                         print("Invalid item. Try again.\n")
+
             elif choice == "3":
                 self.status()
                 continue
+
             elif choice == "4":
                 if random.random() < 0.3:
                     print("\nYou attempt to flee but the enemy blocks your path!\n")
@@ -102,9 +115,11 @@ class Combat:
             else:
                 print("Invalid choice.\n")
                 continue
+
             if self.enemy.is_alive():
                 self.attack(self.enemy, self.player, allow_crit=True)
+
         if not self.enemy.is_alive():
             print(f"You have defeated {self.enemy.name}!")
-        elif self.player.is_alive():
+        elif not self.player.is_alive():
             print("You have been defeated... Game over.")
