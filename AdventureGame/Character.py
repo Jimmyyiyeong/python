@@ -20,7 +20,7 @@ class Character:
     def add_to_inventory(self, item):
         """ Adds an item to inventory """
         self.inventory.append(item)
-        print(f"{item.name} has been added to your inventory!\n")
+        print(f"{item.name} has been added to {self.name} inventory!\n")
 
     def show_inventory(self):
         """ Display inventory as a list, starting at 1"""
