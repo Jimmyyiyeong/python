@@ -1,5 +1,6 @@
 from .Inventory import *
 from .Inventory import *
+from .Util import *
 
 class Character:
 
@@ -11,11 +12,32 @@ class Character:
         self.inventory = []
         self.health = health
         self.max_health = health
+        self.level = 1
+        self.experience = 0
+        self.exp_to_next_level = 100
 
     def greeting(self):
         """ Introduction of player character """
         weapon_name = self.weapon.name if self.weapon else "no weapon"
         print(f"Hello, my name is {self.name} and I wield {weapon_name}. Time to die!\n")
+
+    def gain_experience(self, amount):
+        """ Handles exp gain and levelup. Instead of an if statement we use this while loop that supports multiple levelups in case we earn enough experience poimts """
+        print(f"{self.name} gains {amount} experience points!\n")
+        self.experience += amount
+        while self.experience >= self.exp_to_next_level:
+            self.experience -= self.exp_to_next_level
+            self.level_up()
+
+    def level_up(self):
+        """ Increases player level when threshold is reached. Increases max hp by 10% each levelup, heals player to full and increases exp needed to levelup again by 20% """
+        self.level += 1
+        old_max_hp = self.max_health
+        self.max_health = int(self.max_health * 1.1)
+        self.health = self.max_health
+        self.exp_to_next_level = int(self.exp_to_next_level * 1.20)
+        print(f"\n{YELLOW}{self.name}'s level increased to {self.level}!{RESET}")
+        print(f"Max HP: {old_max_hp} -> {self.max_health}.\n")
 
     def is_alive(self):
         """ Checks if health is above 0 """
