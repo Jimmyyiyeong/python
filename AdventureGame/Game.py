@@ -2,11 +2,13 @@ from AdventureGame import *
 
 class Game:
     def run(self):
+        """ What is actually being ran when you start the game """
         self.setup()
         self.game_loop()
         self.end()
 
     def setup(self):
+        """ Asks for a name, creates the player object and provides an option for starting weapon """
         print("Welcome to the jianghu! Ni jiao shenme?\n")
         name = input("Jiao: ").strip()
     
@@ -25,13 +27,17 @@ class Game:
         weapon = starting_weapons.get(choice, Frostmourne)
     
         self.player = Character(name, health=100, weapon=weapon)
+        self.player.add_to_inventory(Minor_health_potion, 3)
+
         print(f"\nWelcome, {self.player.name}! Your jianghu adventure begins...\n")
 
     def game_loop(self):
+        """ TBD """
         while self.player.is_alive():
             Combat(self.player, goblin()).engage()
 
     def end(self):
+        """ TBD """
         if self.player.is_alive():
             print("You win!")
         else:
