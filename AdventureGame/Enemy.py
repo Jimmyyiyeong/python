@@ -19,5 +19,5 @@ class Enemy(Character):
         return description
     
 #PREDEFINED ENEMIES
-    def spawn_goblin():
-        return Enemy("Premature Goblin", 50, Sulfuras, Goblin_armor)
+def goblin():
+    return Enemy("Premature Goblin", 50, Sulfuras, Goblin_armor)
