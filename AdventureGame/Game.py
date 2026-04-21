@@ -1,10 +1,9 @@
 from AdventureGame import *
-from .Inventory import *
 
 class Game:
     def run(self):
         self.setup()
-        self.game.loop()
+        self.game_loop()
         self.end()
 
     def setup(self):
@@ -28,8 +27,12 @@ class Game:
         self.player = Character(name, health=100, weapon=weapon)
         print(f"\nWelcome, {self.player.name}! Your jianghu adventure begins...\n")
 
+    def game_loop(self):
+        while self.player.is_alive():
+            Combat(self.player, goblin()).engage()
+
     def end(self):
         if self.player.is_alive():
-            print("W")
+            print("You win!")
         else:
-            print("L")
+            print("You lose!")
