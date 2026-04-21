@@ -27,3 +27,9 @@ class Game:
     
         self.player = Character(name, health=100, weapon=weapon)
         print(f"\nWelcome, {self.player.name}! Your jianghu adventure begins...\n")
+
+    def end(self):
+        if self.player.is_alive():
+            print("W")
+        else:
+            print("L")
