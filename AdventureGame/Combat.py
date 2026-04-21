@@ -72,6 +72,8 @@ class Combat:
         wait_for_continue()
 
         while self.enemy.is_alive() and self.player.is_alive():
+            turn_used = False
+
             print("\n---Battle Menu---")
             print("1. Attack")
             print("2. Inventory")
@@ -82,23 +84,27 @@ class Combat:
 
             if choice == "1":
                 self.attack(self.player, self.enemy, allow_crit=True)
+                turn_used = True
 
             elif choice == "2":
                 if not self.player.inventory:
                     print("Your inventory is empty. You can't use any items right now.\n")
-                while True:
-                    self.player.show_inventory()
-                    user_input = input("Choose an item number to use (or 'b' to go back): ").strip().lower()
-                    if user_input == 'b':
-                        print("\nReturning to battle menu...\n")
-                        break
-                    try:
-                        index = int(user_input)
-                        self.player.use_item(index)
-                    except ValueError:
-                        print("Invalid input. Try again.\n")
-                    except IndexError:
-                        print("Invalid item. Try again.\n")
+                else:
+                    while True:
+                        self.player.show_inventory()
+                        user_input = input("Choose an item number to use (or 'b' to go back): ").strip().lower()
+                        if user_input == 'b':
+                            print("\nReturning to battle menu...\n")
+                            break
+                        try:
+                            index = int(user_input)
+                            self.player.use_item(index)
+                            turn_used = True
+                            break
+                        except ValueError:
+                            print("Invalid input. Try again.\n")
+                        except IndexError:
+                            print("Invalid item. Try again.\n")
 
             elif choice == "3":
                 self.status()
@@ -116,10 +122,10 @@ class Combat:
                 print("Invalid choice.\n")
                 continue
 
-            if self.enemy.is_alive():
+            if turn_used and self.enemy.is_alive():
                 self.attack(self.enemy, self.player, allow_crit=True)
 
         if not self.enemy.is_alive():
             print(f"You have defeated {self.enemy.name}!")
         elif not self.player.is_alive():
-            print("You have been defeated... Game over.")
+            print(f"{self.enemy.name} slapped you so hard your ancestors got dizzy lol")
