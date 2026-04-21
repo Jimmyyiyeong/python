@@ -1,5 +1,4 @@
 from .Inventory import *
-from .Inventory import *
 from .Util import *
 
 class Character:
@@ -7,6 +6,7 @@ class Character:
     def __init__(self, name, char_type="char", health=0, weapon=None):
         """ Default character attributes """
         self.name = name
+        self.char_type = char_type
         self.weapon = weapon
         self.armor = None
         self.inventory = []
