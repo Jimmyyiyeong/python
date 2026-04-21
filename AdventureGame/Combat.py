@@ -1,4 +1,4 @@
-from AdventureGame.Util.Styling import RED, RESET, ITALIC, wait_for_continue
+from .Util import *
 import random
 
 class Combat:
