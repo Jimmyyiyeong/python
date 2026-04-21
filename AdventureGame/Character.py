@@ -43,10 +43,14 @@ class Character:
         """ Checks if health is above 0 """
         return self.health > 0
 
-    def add_to_inventory(self, item):
-        """ Adds an item to inventory """
-        self.inventory.append(item)
-        print(f"{item.name} has been added to {self.name} inventory!\n")
+    def add_to_inventory(self, item, quantity=1):
+        """ Adds multiple or single item to inventory """
+        for _ in range(quantity):
+            self.inventory.append(item)        
+        if quantity == 1:
+            print(f"{item.name} has been added to {self.name}'s inventory!\n")
+        else:
+            print(f"{quantity}x {item.name} have been added to {self.name}'s inventory!\n")
 
     def show_inventory(self):
         """ Display inventory as a list, starting at 1"""
