@@ -2,19 +2,18 @@ from .Item import Item
 
 class Consumables(Item):
     
-    def __init__(self, name, effect_amount=0, rarity=None, permanent=False):
+    def __init__(self, name, effect_amount=0, rarity=None, permanent=False, description=""):
         """ Inherits attributes from Items """
-        super().__init__(name, item_type="Consumable", rarity=rarity)
+        super().__init__(name, item_type="Consumable", rarity=rarity, description=description)
         """ `Default object attributes """
         self.permanent = permanent
         self.effect_amount = effect_amount
         
     def describe(self):
         """ Description of consumable """
-        return (
-            f"{self.name} | Type: {self.item_type} | Rarity: {self.rarity} | "
-            f"Permanent: {"Yes" if self.permanent else "No"} "
-        )
+        base = super().describe()
+        base += f" | Permanent: {"Yes" if self.permanent else "No"}"
+        return base
     
     def use(self, user):
         """ user in this case is placeholder logic for future expansion. It would enable enemies to use potions aswell using the same function """
@@ -26,5 +25,5 @@ class Consumables(Item):
         print(f"{user.name}'s HP: {user.health}/{user.max_health}\n")
         
 #PREDEFINED CONSUMABLES
-Minor_health_potion = Consumables("Minor Health Potion", 20, "Common")
-Major_Health_potion = Consumables("Major Health Potion", 50, "Common")
+Minor_health_potion = Consumables("Minor Health Potion", 20, "Common", description="Restores 20 HP")
+Major_Health_potion = Consumables("Major Health Potion", 50, "Common", description="Restores 50 HP")
