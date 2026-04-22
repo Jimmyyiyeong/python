@@ -46,6 +46,8 @@ class Game:
             self.player.show_inventory()
         elif choice == "3" or choice == "status":
             self.player.status()
+            self.player.progress()
+            self.player.equipment()
         elif choice == "4" or choice == "exit":
             print("Exiting game..")
             exit()
