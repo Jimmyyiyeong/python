@@ -12,7 +12,10 @@ class Combat:
         """ Prints player and enemy status """
 
         self.player.status()
+        self.player.progress()
+        self.player.equipment()
         self.enemy.status()
+        self.enemy.equipment()
 
     def calculate_damage(self, attacker, defender, allow_crit=True):
         """ Combat logic. Randomizes a number between the weapon min and max damage, checks for crit and armor absorption and returns the final damage calculation and printable log 
@@ -37,7 +40,7 @@ class Combat:
         if absorbed > 0:
             log += f"{ITALIC}{defender.name}'s {defender.armor.name} absorbs {absorbed} damage!{RESET}\n"
 
-        log += f"{defender.name} takes {final_damage} damage. (HP: {defender.health - final_damage}/{defender.max_health})\n"
+        log += f"{defender.name} takes {final_damage} damage. (HP: {defender.health - final_damage}/{defender.max_health})"
 
         return final_damage, log
 
@@ -78,7 +81,7 @@ class Combat:
                         self.player.show_inventory()
                         user_input = input("Choose an item number to use (or 'b' to go back): ").strip().lower()
                         if user_input == 'b':
-                            print("\nReturning to battle menu...\n")
+                            print("\nReturning to battle menu...")
                             break
                         try:
                             index = int(user_input)
@@ -91,7 +94,7 @@ class Combat:
                             print("Invalid item. Try again.\n")
 
             elif choice == "3":
-                self.status()
+                self.combat_status()
                 continue
 
             elif choice == "4":
@@ -110,6 +113,6 @@ class Combat:
                 self.attack(self.enemy, self.player, allow_crit=True)
 
         if not self.enemy.is_alive():
-            print(f"You have defeated {self.enemy.name}!")
+            print(f"\nYou have defeated {self.enemy.name}!\n")
         elif not self.player.is_alive():
-            print(f"{self.enemy.name} slapped you so hard your ancestors got dizzy lol")
+            print(f"\n{self.enemy.name} slapped you so hard your ancestors got dizzy lol\n")

@@ -26,16 +26,22 @@ class Character:
 
         print(f"\n{self.name}'s status:")
         print(f"Health: {self.health}/{self.max_health}")
+        print(f"Level: {self.level}")
+
+    def progress(self):
+        print(f"EXP: {self.experience}/{self.exp_to_next_level}")
     
+    def equipment(self):
+        """ Prints the equipment of any character """
         if self.weapon:
-            print(f"Equipped weapon: {self.weapon.describe()}")
+            print(f"Equipped weapon: {self.weapon.name}")
         else:
             print("No weapon equipped!")
     
         if self.armor:
             print(f"Equipped armor: {self.armor.name} (abs: {self.armor.defense})\n")
         else:
-            print("No armor equipped.\n")
+            print("No armor equipped")
 
     def gain_experience(self, amount):
         """ Handles exp gain and levelup. Instead of an if statement we use this while loop that supports multiple levelups in case we earn enough experience poimts """
