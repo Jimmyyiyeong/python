@@ -74,25 +74,10 @@ class Combat:
                 turn_used = True
 
             elif choice == "2":
-                if not self.player.inventory:
-                    print("Your inventory is empty. You can't use any items right now.\n")
-                else:
-                    while True:
-                        self.player.show_inventory()
-                        user_input = input("Choose an item number to use (or 'b' to go back): ").strip().lower()
-                        if user_input == 'b':
-                            print("\nReturning to battle menu...")
-                            break
-                        try:
-                            index = int(user_input)
-                            self.player.use_item(index)
-                            turn_used = True
-                            break
-                        except ValueError:
-                            print("Invalid input. Try again.\n")
-                        except IndexError:
-                            print("Invalid item. Try again.\n")
-
+                used_item = self.player.open_inventory()
+                if used_item:
+                    turn_used = True
+                    
             elif choice == "3":
                 self.combat_status()
                 continue

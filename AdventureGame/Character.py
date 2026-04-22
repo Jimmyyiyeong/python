@@ -64,6 +64,26 @@ class Character:
     def is_alive(self):
         """ Checks if health is above 0 """
         return self.health > 0
+    
+    def open_inventory(self):
+        if not self.inventory:
+            print("Your inventory is empty. You can't use any items right now.\n")
+        else:
+            while True:
+                self.show_inventory()
+                user_input = input("Choose an item number to use (or 'b' to go back): ").strip().lower()
+                if user_input == 'b':
+                    print("\nClosing inventory..")
+                    break
+                try:
+                    index = int(user_input)
+                    success = self.use_item(index)
+                    if success:
+                        break
+                except ValueError:
+                    print("Invalid input. Try again.\n")
+                except IndexError:
+                    print("Invalid item. Try again.\n")
 
     def add_to_inventory(self, item, quantity=1):
         """ Adds multiple or single item to inventory """
@@ -86,13 +106,13 @@ class Character:
 
     def use_item(self, index):
         """ Uses/equips item/weapon and removes it from inventory """
-        try:
-            index -= 1
-            if 0 <= index < len(self.inventory):
-                item = self.inventory.pop(index)
-                item.use(self)
-            else:
-                print("Invalid item selection.\n")
-        except(ValueError, IndexError, AttributeError) as e:
-                print("Something went wrong while using the item...\n")
+        index -= 1
+        if 0 <= index < len(self.inventory):
+            item = self.inventory.pop(index)
+            item.use(self)
+            return True
+        else:
+            print("Invalid item selection.\n")
+            return False
+
     
