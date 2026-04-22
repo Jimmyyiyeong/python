@@ -29,12 +29,33 @@ class Game:
         self.player = Character(name, health=100, weapon=weapon)
         self.player.add_to_inventory(Minor_health_potion, 3)
 
-        print(f"\nWelcome, {self.player.name}! Your jianghu adventure begins...\n")
+        print(f"Welcome, {self.player.name}! Your jianghu adventure begins...\n")
+
+    def menu(self):
+        print("Choose an action:")
+        print("1. Fight")
+        print("2. Inventory")
+        print("3. Status")
+        print("4. Exit game")
+
+    def action(self, choice):
+        if choice == "1" or choice == "fight":
+            enemy = goblin()
+            Combat(self.player, enemy).engage()
+        elif choice == "2" or choice == "inventory":
+            self.player.show_inventory()
+        elif choice == "3" or choice == "status":
+            self.player.status()
+        elif choice == "4" or choice == "exit":
+            print("Exiting game..")
+            exit()
 
     def game_loop(self):
         """ TBD """
         while self.player.is_alive():
-            Combat(self.player, goblin()).engage()
+            self.menu()
+            choice = input("> ").strip().lower()
+            self.action(choice)
 
     def end(self):
         """ TBD """
