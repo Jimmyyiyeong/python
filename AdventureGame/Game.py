@@ -13,9 +13,9 @@ class Game:
         name = input("Jiao: ").strip()
     
         print("\nChoose your starting weapon:")
-        print("1. Frostmourne (2-18 dmg, 50% crit)")
-        print("2. Sulfuras (5-15 dmg, 10% crit)")
-        print("3. Thunderfury (8-12 dmg, 10% crit)")
+        print(f"1. {Frostmourne.describe()}")
+        print(f"2. {Sulfuras.describe()}")
+        print(f"3. {Thunderfury.describe()}")
     
         starting_weapons = {
             "1": Frostmourne,
@@ -32,6 +32,7 @@ class Game:
         print(f"Welcome, {self.player.name}! Your jianghu adventure begins...\n")
 
     def menu(self):
+        """ Main menu """
         print("Choose an action:")
         print("1. Fight")
         print("2. Inventory")
@@ -39,11 +40,12 @@ class Game:
         print("4. Exit game")
 
     def action(self, choice):
+        """" What happens depending on player choice """
         if choice == "1" or choice == "fight":
             enemy = goblin()
             Combat(self.player, enemy).engage()
         elif choice == "2" or choice == "inventory":
-            self.player.show_inventory()
+            self.player.open_inventory()
         elif choice == "3" or choice == "status":
             self.player.status()
             self.player.progress()
