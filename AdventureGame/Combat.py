@@ -8,27 +8,11 @@ class Combat:
         self.player = player
         self.enemy = enemy
 
-    def character_status(self, character):
-        """Prints the status of any character"""
-
-        print(f"\n{character.name}'s status:")
-        print(f"Health: {character.health}/{character.max_health}")
-    
-        if character.weapon:
-            print(f"Equipped weapon: {character.weapon.describe()}")
-        else:
-            print("No weapon equipped!")
-    
-        if character.armor:
-            print(f"Equipped armor: {character.armor.name} (abs: {character.armor.defense})\n")
-        else:
-            print("No armor equipped.\n")
-
-    def status(self):
+    def combat_status(self):
         """ Prints player and enemy status """
 
-        self.character_status(self.player)
-        self.character_status(self.enemy)
+        self.player.status()
+        self.enemy.status()
 
     def calculate_damage(self, attacker, defender, allow_crit=True):
         """ Combat logic. Randomizes a number between the weapon min and max damage, checks for crit and armor absorption and returns the final damage calculation and printable log 
