@@ -43,12 +43,12 @@ class Combat:
         print(log)
         defender.health = max(0, defender.health - damage)
 
-    def engage(self):
-        """ Combat loop using a while loop and switch, reading input from player. Also an experience gain system that scales depending on player and enemy level"""
-        print(f"\nA wild {self.enemy.name} appears!")
-        wait_for_continue()
-        while self.enemy.is_alive() and self.player.is_alive():
-            turn_used = False
+    def start_turn(self):
+        """ Placeholder for checking status effects in the future """
+
+    def player_turn(self):
+        """ Players turn to act with allowing some actions not to consume a turn using a while loop and switch for choices """
+        while True:
             print("\n---Battle Menu---")
             print("1. Attack")
             print("2. Inventory")
@@ -57,11 +57,11 @@ class Combat:
             choice = input("> ").strip()
             if choice == "1":
                 self.attack(self.player, self.enemy, allow_crit=True)
-                turn_used = True
+                return False
             elif choice == "2":
                 used_item = self.player.open_inventory()
                 if used_item:
-                    turn_used = True
+                    return False
             elif choice == "3":
                 self.combat_status()
                 continue
@@ -72,15 +72,35 @@ class Combat:
                     continue
                 else:
                     print("\nYou fled the battle!")
-                    return
+                    return True
             else:
                 print("Invalid choice.\n")
-                continue
-            if turn_used and self.enemy.is_alive():
-                self.attack(self.enemy, self.player, allow_crit=True)
+
+    def enemy_turn(self):
+        self.attack(self.enemy, self.player)
+
+    def end_combat(self):
+        """ Rewards experience if you win and game over if you lose """
         if not self.enemy.is_alive():
             print(f"\nYou have defeated {self.enemy.name}!\n")
             Experience = self.enemy.reward_experience(self.player)
             self.player.gain_experience(Experience)
         elif not self.player.is_alive():
             print(f"\n{self.enemy.name} slapped you so hard your ancestors got dizzy lol\n")
+
+    def engage(self):
+        """ Combat loop """
+        print(f"\nA wild {self.enemy.name} appears!")
+        wait_for_continue()
+
+        while self.player.is_alive() and self.enemy.is_alive():
+
+            self.start_turn()
+
+            if self.player_turn():
+                break
+
+            if self.enemy.is_alive():
+                self.enemy_turn()
+
+        self.end_combat()
