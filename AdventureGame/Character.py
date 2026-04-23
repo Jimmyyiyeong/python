@@ -3,7 +3,7 @@ from .Util import *
 
 class Character:
 
-    def __init__(self, name, char_type="char", health=0, weapon=None):
+    def __init__(self, name, char_type="char", health=0, weapon=None, level=1):
         """ Default character attributes """
         self.name = name
         self.char_type = char_type
@@ -12,9 +12,9 @@ class Character:
         self.inventory = []
         self.health = health
         self.max_health = health
-        self.level = 1
+        self.level = level
         self.experience = 0
-        self.exp_to_next_level = 100
+        self.experience_to_next_level = 100
 
     def greeting(self):
         """ Introduction of player character """
@@ -29,7 +29,7 @@ class Character:
         print(f"Level: {self.level}")
 
     def progress(self):
-        print(f"EXP: {self.experience}/{self.exp_to_next_level}")
+        print(f"EXP: {self.experience}/{self.experience_to_next_level}")
     
     def equipment(self):
         """ Prints the equipment of any character """
@@ -45,10 +45,10 @@ class Character:
 
     def gain_experience(self, amount):
         """ Handles exp gain and levelup. Instead of an if statement we use this while loop that supports multiple levelups in case we earn enough experience poimts """
-        print(f"{self.name} gains {amount} experience points!\n")
+        print(f"{self.name} gains {amount} experience points!")
         self.experience += amount
-        while self.experience >= self.exp_to_next_level:
-            self.experience -= self.exp_to_next_level
+        while self.experience >= self.experience_to_next_level:
+            self.experience -= self.experience_to_next_level
             self.level_up()
 
     def level_up(self):
@@ -57,21 +57,23 @@ class Character:
         old_max_hp = self.max_health
         self.max_health = int(self.max_health * 1.1)
         self.health = self.max_health
-        self.exp_to_next_level = int(self.exp_to_next_level * 1.20)
+        self.experience_to_next_level = int(self.experience_to_next_level * 1.20)
         print(f"\n{YELLOW}{self.name}'s level increased to {self.level}!{RESET}")
-        print(f"Max HP: {old_max_hp} -> {self.max_health}.\n")
+        print(f"Max HP: {old_max_hp} -> {self.max_health}.")
 
     def is_alive(self):
         """ Checks if health is above 0 """
         return self.health > 0
     
     def open_inventory(self):
+        """ Opens inventory and let's player choose to use an item and removes it from inventory or type "b" to go back """
         if not self.inventory:
             print("Your inventory is empty. You can't use any items right now.\n")
         else:
             while True:
                 self.show_inventory()
-                user_input = input("Choose an item number to use (or 'b' to go back): ").strip().lower()
+                print("Choose an item number to use (or 'b' to go back):")
+                user_input = input("> ").strip().lower()
                 if user_input == 'b':
                     print("\nClosing inventory..")
                     break

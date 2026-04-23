@@ -15,7 +15,7 @@ class Game:
         print("\nChoose your starting weapon:")
         print(f"1. {Frostmourne.describe()}")
         print(f"2. {Sulfuras.describe()}")
-        print(f"3. {Thunderfury.describe()}")
+        print(f"3. {Thunderfury.describe()}\n")
     
         starting_weapons = {
             "1": Frostmourne,
@@ -23,17 +23,17 @@ class Game:
             "3": Thunderfury
         }
     
-        choice = input("\nChoose (1-3): ").strip()
+        choice = input("> ").strip()
         weapon = starting_weapons.get(choice, Frostmourne)
     
         self.player = Character(name, health=100, weapon=weapon)
         self.player.add_to_inventory(Minor_health_potion, 3)
 
-        print(f"Welcome, {self.player.name}! Your jianghu adventure begins...\n")
+        print(f"Welcome, {self.player.name}! Your jianghu adventure begins...")
 
     def menu(self):
         """ Main menu """
-        print("Choose an action:")
+        print("\n---Main Menu---")
         print("1. Fight")
         print("2. Inventory")
         print("3. Status")
