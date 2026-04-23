@@ -18,6 +18,12 @@ class Enemy(Character):
             description += f"Weapon: Unarmed"
         return description
     
+    def reward_experience(self, player):
+            level_difference = self.level - player.level
+            multiplier = 1.0 + (level_difference * 0.2)
+            multiplier = max(0.1, multiplier)
+            return int(self.experience_value * multiplier)
+    
 #PREDEFINED ENEMIES
 def goblin():
     return Enemy("Premature Goblin", 50, Sulfuras, Goblin_armor, level=1, experience_value=100)

@@ -80,10 +80,7 @@ class Combat:
                 self.attack(self.enemy, self.player, allow_crit=True)
         if not self.enemy.is_alive():
             print(f"\nYou have defeated {self.enemy.name}!\n")
-            level_difference = self.enemy.level - self.player.level
-            experience_multiplier = 1.0 + (level_difference * 0.2)
-            experience_multiplier = max(0.1, experience_multiplier)
-            experience_earned = int(self.enemy.experience_value * experience_multiplier)
-            self.player.gain_experience(experience_earned)
+            Experience = self.enemy.reward_experience(self.player)
+            self.player.gain_experience(Experience)
         elif not self.player.is_alive():
             print(f"\n{self.enemy.name} slapped you so hard your ancestors got dizzy lol\n")
